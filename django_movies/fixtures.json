@@ -1,0 +1,110 @@
+[
+  {
+    "model": "core.genre",
+    "pk": 1,
+    "fields": {
+      "name": "horror",
+      "age_limit": 18
+    }
+  },
+  {
+    "model": "core.genre",
+    "pk": 2,
+    "fields": {
+      "name": "comedy",
+      "age_limit": 5
+    }
+  },
+  {
+    "model": "core.director",
+    "pk": 1,
+    "fields": {
+      "full_name": "Igor Lowas"
+    }
+  },
+  {
+    "model": "core.director",
+    "pk": 2,
+    "fields": {
+      "full_name": "Tom Selec"
+    }
+  },
+  {
+    "model": "core.movie",
+    "pk": 1,
+    "fields": {
+      "title": "MDK",
+      "rating": 7,
+      "released": "1980-12-27",
+      "description": null,
+      "created": "2020-10-20T18:00:53.580Z",
+      "genre": 1,
+      "director": 2
+    }
+  },
+  {
+    "model": "core.movie",
+    "pk": 2,
+    "fields": {
+      "title": "Matrix",
+      "rating": null,
+      "released": "2002-05-15",
+      "description": null,
+      "created": "2020-10-20T18:01:23.417Z",
+      "genre": null,
+      "director": null
+    }
+  },
+  {
+    "model": "core.movie",
+    "pk": 3,
+    "fields": {
+      "title": "Mars",
+      "rating": null,
+      "released": "2005-01-01",
+      "description": null,
+      "created": "2020-10-20T18:05:21.921Z",
+      "genre": null,
+      "director": null
+    }
+  },
+  {
+    "model": "core.movie",
+    "pk": 4,
+    "fields": {
+      "title": "LOTR",
+      "rating": 9,
+      "released": "2005-08-05",
+      "description": null,
+      "created": "2020-10-20T18:05:21.921Z",
+      "genre": 1,
+      "director": null
+    }
+  },
+  {
+    "model": "core.movie",
+    "pk": 5,
+    "fields": {
+      "title": "love",
+      "rating": 23,
+      "released": "2005-08-05",
+      "description": null,
+      "created": "2020-10-20T18:05:21.921Z",
+      "genre": 2,
+      "director": 1
+    }
+  },
+  {
+    "model": "core.movie",
+    "pk": 6,
+    "fields": {
+      "title": "kljho",
+      "rating": 4,
+      "released": "2020-10-14",
+      "description": "aSa",
+      "created": "2020-10-21T21:16:22.308Z",
+      "genre": null,
+      "director": null
+    }
+  }
+]
