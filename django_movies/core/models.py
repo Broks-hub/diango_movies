@@ -42,5 +42,14 @@ class Movie(models.Model):
     class Meta:
         unique_together = ('title', 'released')
 
+#
+# #1.
+# Movie.objects.filter(countries__name__in=['Poland', 'Germany']).distinct()
+# #2.
+# Movie.objects.filter(released__year__gt=2020, rating__gte=8)
+# #3.
+# from django.db.models import Count
+# genres = Movie.objects.values('genre').annotate(genres_count=Count('genre')).filter(genres_count__gte=2).values_list('genre')Movie.objects.filter(genre__in=genres)
+
 
 
