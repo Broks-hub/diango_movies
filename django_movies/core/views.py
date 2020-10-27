@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from core.models import Movie
+from core.models import Movie, AGE_LIMIT
 
 
 def movies(request):
     return render(
         request,
         template_name='movies.html',
-        context={'movies': Movie.objects.all()}
+        context={'movies': Movie.objects.all(),
+                 'limits': AGE_LIMIT},
+        # context={'movies': Movie.objects.exclude(genre__age_limit=AGE_LIMIT.adult)},
     )
 
 

@@ -1,5 +1,12 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from model_utils import Choices
+
+AGE_LIMIT = Choices(
+    (0, 'kids', 'kids'),
+    (1, 'teens', 'teens'),
+    (2, 'adults', 'adults'),
+)
 
 
 class Country(models.Model):
@@ -11,7 +18,7 @@ class Country(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(max_length=20, unique=True)
-    age_limit = models.IntegerField(null=True)
+    age_limit = models.IntegerField(blank=True, null=True, choices=AGE_LIMIT)
 
     def __str__(self):
         return self.name
