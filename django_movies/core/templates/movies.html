@@ -4,11 +4,11 @@
     <h1>Welcome to Django Movies!</h1>
     <ul>
             {% for movie in object_list %}
-             {% comment %}   {% if movie.genre.age_limit != limits.adults %}    {% endcomment %}
+            {% comment %}   {% if movie.genre.age_limit != limits.adults %}    {% endcomment %}
                     <li>
                         {{ movie.title }} ({{ movie.released.year }}) by {{ movie.director }}, genre: {{ movie.genre.name }}
                     </li>
-             {% comment %}   {% endif %}    {% endcomment %}
+            {% comment %}   {% endif %}    {% endcomment %}
             {% endfor %}
     </ul>
 

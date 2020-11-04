@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from core.views import hello, IndexView
+from core.views import MovieListView, MovieCreateView, MovieDeleteView, MovieUpdateView, MovieDetailView
 
+app_name = 'core'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', IndexView.as_view(), name='index'),
-    path('hello/', hello),
-    path("core/", include('core.urls', namespace='core')),
+    path('movie/list', MovieListView.as_view(), name='movie_list'),
+    path('movie/detail/<pk>', MovieDetailView.as_view(), name='movie_detail'),
+    path('movie/create', MovieCreateView.as_view(success_url='create'), name='movie_create'),
+    path('movie/update/<pk>', MovieUpdateView.as_view(), name='movie_update'),
+    path('movie/delete/<pk>', MovieDeleteView.as_view(), name='movie_delete')
+
 ]
