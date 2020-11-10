@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 from django import views
 from django.urls import reverse_lazy
@@ -10,10 +11,15 @@ from core.forms import MovieForm
 from pip._internal.utils import logging
 
 
-# logging.basicConfig()
+LOGGER = logging.getLogger()
 
 
-class MovieUpdateView(UpdateView):
+class StaffRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class MovieUpdateView(StaffRequiredMixin, LoginRequiredMixin, UpdateView):
     template_name = 'core/form.html'
     model = Movie
     form_class = MovieForm
@@ -24,12 +30,12 @@ class MovieUpdateView(UpdateView):
         return super().form_invalid(form)
 
 
-class MovieDeleteView(DeleteView):
+class MovieDeleteView(LoginRequiredMixin, DeleteView):
     model = Movie
     success_url = reverse_lazy('index')
 
 
-class MovieCreateView(CreateView):
+class MovieCreateView(LoginRequiredMixin, CreateView):
     title = 'Add Movie'
     template_name = 'form.html'
     form_class = MovieForm
@@ -44,7 +50,7 @@ class MovieCreateView(CreateView):
     #     return super().form_valid(forms)
 
 
-class MovieListView(ListView):
+class MovieListView(StaffRequiredMixin, ListView):
     template_name = 'movies.html'
     model = Movie
 
@@ -52,10 +58,6 @@ class MovieListView(ListView):
         result = super().get_context_data(**kwargs)
         result['limits'] = AGE_LIMIT
         return result
-
-
-class IndexView(MovieListView):
-    template_name = 'index.html'
 
 
 class MovieDetailView(DetailView):
@@ -79,6 +81,10 @@ def hello(request):
         template_name='hello.html',
         context={'adjectives': ['beatufiul', 'cruel', 'wonderfull']}
     )
+
+
+
+
 
 # def hello(request):
 #     return HttpResponse('Hello world!')

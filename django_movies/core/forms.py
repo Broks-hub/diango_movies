@@ -1,12 +1,18 @@
 import re
 from datetime import date
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Row, Column, Submit
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 from django.core.exceptions import ValidationError
 
 from core.models import Genre, Movie, Director, Country
 from django.core.validators import MinLengthValidator
 from django.forms import SelectDateWidget
+
+from accounts.forms import SubmittableForm
 
 
 def capitalized_validator(value):
@@ -29,10 +35,22 @@ class MovieForm(forms.ModelForm):
     class Meta:
         model = Movie
         fields = '__all__'
-        title = forms.CharField(validators=[MinLengthValidator(3)])
-        rating = forms.IntegerField(min_value=1, max_value=10)
-        released = PastMonthField
+    title = forms.CharField(validators=[MinLengthValidator(3)])
+    rating = forms.IntegerField(min_value=1, max_value=10)
+    released = PastMonthField
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'title',
+            Row(Column('genre'), Column('rating'), Column('released')),
+            'director',
+            'description',
+            'countries',
+            'created',
+            Submit('submit', 'Submit')
+        )
     # class MovieForm(forms.Form):
     #     title = forms.CharField(max_length=100)
     #     genre = forms.ModelChoiceField(queryset=Genre.objects.all())
